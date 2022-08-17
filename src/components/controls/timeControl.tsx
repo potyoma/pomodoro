@@ -13,14 +13,14 @@ type Props = {
 const TimeControl: React.FC<Props> = ({ type }) => {
   const dispatch = useDispatch()
 
-  const value = useSelector((state: State) => state[`${type}Length`])
+  const value = useSelector((state: State) => state[type])
 
   const handleDecrement = () => dispatch(decrement(type))
   const handleIncrement = () => dispatch(increment(type))
 
   return (
     <Container maxWidth="sm">
-      <ArrowDownIcon  id={`${type}-decrement`} onClick={handleDecrement} />
+      <ArrowDownIcon id={`${type}-decrement`} onClick={handleDecrement} />
       <Typography id={`${type}-length`} variant="h4">
         {value}
       </Typography>
