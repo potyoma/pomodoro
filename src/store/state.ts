@@ -4,7 +4,7 @@ import { PeriodType } from "../entities/period"
 export interface State {
   break: number
   session: number
-  currentPeriod?: PeriodType
+  currentPeriod: PeriodType
   time: number
   ticking: boolean
   pausedTime?: number
@@ -26,7 +26,7 @@ const slice = createSlice({
       state[type]++
     },
     decrement: (state, { payload: type }: PayloadAction<PeriodType>) => {
-      state[type]--
+      state[type] > 0 && state[type]--
     },
     switchPeriod: (state, { payload: type }: PayloadAction<PeriodType>) => {
       state.currentPeriod = type
@@ -39,4 +39,5 @@ const slice = createSlice({
 })
 
 export const reducer = slice.reducer
-export const { increment, decrement, switchPeriod } = slice.actions
+export const { increment, decrement, switchPeriod, pause, reset } =
+  slice.actions

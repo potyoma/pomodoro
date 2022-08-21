@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material"
 import { Container } from "@mui/system"
 import { PeriodType } from "../../entities/period"
+import { toUpperFirst } from "../../utils"
 import { TimeControl } from "./timeControl"
 
 type Props = {
@@ -8,8 +9,6 @@ type Props = {
 }
 
 const TimePeriod: React.FC<Props> = ({ type }) => {
-  const toUpperFirst = (word: string) =>
-    word.at(0)?.toUpperCase() + word.slice(1)
 
   return (
     <Container maxWidth="sm">

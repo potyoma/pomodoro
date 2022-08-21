@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { Container } from "@mui/system"
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons"
 import { useSelector } from "react-redux"
@@ -20,11 +20,15 @@ const TimeControl: React.FC<Props> = ({ type }) => {
 
   return (
     <Container maxWidth="sm">
-      <ArrowDownIcon id={`${type}-decrement`} onClick={handleDecrement} />
+      <Button id={`${type}-decrement`} onClick={handleDecrement}>
+        <ArrowDownIcon />
+      </Button>
       <Typography id={`${type}-length`} variant="h4">
         {value}
       </Typography>
-      <ArrowUpIcon id={`${type}-increment`} onClick={handleIncrement} />
+      <Button id={`${type}-increment`} onClick={handleIncrement}>
+        <ArrowUpIcon />
+      </Button>
     </Container>
   )
 }
