@@ -26,7 +26,7 @@ const slice = createSlice({
       state[type]++
     },
     decrement: (state, { payload: type }: PayloadAction<PeriodType>) => {
-      state[type] > 0 && state[type]--
+      state[type] > 1 && state[type]--
     },
     switchPeriod: (state, { payload: type }: PayloadAction<PeriodType>) => {
       state.currentPeriod = type

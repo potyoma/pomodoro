@@ -12,7 +12,7 @@ const useTimer = (
   minutes: number,
   onReset: () => void,
   onComplete?: () => void,
-  onPause?: (seconds: number) => void
+  onStart?: () => void
 ): Timer => {
   const timerId = useRef<number | undefined>()
   const time = minutes * 60
@@ -24,7 +24,7 @@ const useTimer = (
     timerId.current = undefined
   }
 
-  const tick = useCallback(() => {
+  const tick = () => {
     if (timeLeft > 0) {
       setTime(timeLeft - 1)
     }
@@ -34,7 +34,7 @@ const useTimer = (
       clear()
       onComplete?.()
     }
-  }, [onComplete, timeLeft])
+  }
 
   useEffect(() => {
     if (ticking) {
@@ -44,18 +44,20 @@ const useTimer = (
     }
 
     return clear
-  }, [ticking])
+  }, [ticking, timeLeft])
 
   useEffect(() => {
     setTime(time)
   }, [time])
 
-  const start = () => setTicking(true)
+  const start = useCallback(() => {
+    setTicking(true)
+    onStart?.()
+  }, [onStart])
 
   const pause = useCallback(() => {
     setTicking(false)
-    onPause?.(timeLeft)
-  }, [onPause, timeLeft])
+  }, [timeLeft])
 
   const reset = useCallback(() => {
     setTicking(false)
